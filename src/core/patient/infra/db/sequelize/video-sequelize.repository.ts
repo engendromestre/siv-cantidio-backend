@@ -3,7 +3,7 @@ import { InvalidArgumentError } from '../../../../shared/domain/errors/invalid-a
 import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
 import { SortDirection } from '../../../../shared/domain/repository/search-params';
 import { UnitOfWorkSequelize } from '../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
-import { Video, VideoId } from '../../../domain/patient.aggregate';
+import { Video, VideoId } from '../../../domain/video.aggregate';
 import {
   IVideoRepository,
   VideoSearchParams,

@@ -1,9 +1,9 @@
 import { DataType } from 'sequelize-typescript';
 import { ImageMediaModel } from '../image-media.model';
-import { setupSequelizeForPatient } from '../testing/helpers';
+import { setupSequelizeForVideo } from '../testing/helpers';
 
 describe('ImageMediaModel Unit Tests', () => {
-  setupSequelizeForPatient();
+  setupSequelizeForVideo();
 
   test('table name', () => {
     expect(ImageMediaModel.tableName).toBe('image_medias');
@@ -12,7 +12,7 @@ describe('ImageMediaModel Unit Tests', () => {
   test('mapping props', () => {
     const uniqueIndex = ImageMediaModel.options.indexes![0];
     expect(uniqueIndex).toMatchObject({
-      fields: ['patient_id', 'patient_related_field'],
+      fields: ['video_id', 'video_related_field'],
       unique: true,
     });
 
@@ -22,8 +22,8 @@ describe('ImageMediaModel Unit Tests', () => {
       'image_media_id',
       'name',
       'location',
-      'patient_id',
-      'patient_related_field',
+      'video_id',
+      'video_related_field',
     ]);
 
     const imageMediaIdAttr = attributesMap.image_media_id;
@@ -50,22 +50,22 @@ describe('ImageMediaModel Unit Tests', () => {
       type: DataType.STRING(255),
     });
 
-    const patientIdAttr = attributesMap.patient_id;
-    expect(patientIdAttr).toMatchObject({
-      field: 'patient',
-      fieldName: 'patient',
+    const videoIdAttr = attributesMap.video_id;
+    expect(videoIdAttr).toMatchObject({
+      field: 'video_id',
+      fieldName: 'video_id',
       allowNull: false,
       type: DataType.UUID(),
       references: {
-        model: 'patient',
-        key: 'patient_id',
+        model: 'videos',
+        key: 'video_id',
       },
     });
 
-    const patientRelatedFieldAttr = attributesMap.patient_related_field;
-    expect(patientRelatedFieldAttr).toMatchObject({
-      field: 'patient_related_field',
-      fieldName: 'patient_related_field',
+    const videoRelatedFieldAttr = attributesMap.video_related_field;
+    expect(videoRelatedFieldAttr).toMatchObject({
+      field: 'video_related_field',
+      fieldName: 'video_related_field',
       allowNull: false,
       type: DataType.STRING(20),
     });

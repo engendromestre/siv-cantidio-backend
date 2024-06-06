@@ -14,6 +14,8 @@ import { ImageMediaModel } from './image-media.model';
 
 export type PatientModelProps = {
   patient_id: string;
+  patient_id_siresp: string;
+  patient_chart_number?: string | null;
   full_name: string;
   mother_full_name: string;
   birthdate: Date;
@@ -33,19 +35,22 @@ export type PatientModelProps = {
 export class PatientModel extends Model<PatientModelProps> {
   @PrimaryKey
   @Column({ type: DataType.UUID })
-  declare video_id: string;
+  declare patient_id: string;
+
+  @Column({ allowNull: false, type: DataType.STRING(5) })
+  declare patient_id_siresp: string;
+
+  @Column({ allowNull: true, type: DataType.STRING(5) })
+  declare patient_chart_number: string;
 
   @Column({ allowNull: false, type: DataType.STRING(255) })
-  declare title: string;
+  declare full_name: string;
 
-  @Column({ allowNull: false, type: DataType.TEXT })
-  declare description: string;
+  @Column({ allowNull: true, type: DataType.STRING(255) })
+  declare mother_full_name: string;
 
-  @Column({ allowNull: false, type: DataType.SMALLINT })
-  declare year_launched: number;
-
-  @Column({ allowNull: false, type: DataType.SMALLINT })
-  declare duration: number;
+  @Column({ allowNull: true, type: DataType.DATE(6) })
+  declare birthdate: Date;
 
   @Column({ allowNull: false, type: DataType.BOOLEAN })
   declare is_opened: boolean;
@@ -82,7 +87,7 @@ export class PatientCategoryModel extends Model<PatientCategoryModelProps> {
   @PrimaryKey
   @ForeignKey(() => PatientModel)
   @Column({ type: DataType.UUID })
-  declare video_id: string;
+  declare patient_id: string;
 
   @PrimaryKey
   @ForeignKey(() => CategoryModel)

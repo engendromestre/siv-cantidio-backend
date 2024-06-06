@@ -11,7 +11,7 @@ import { GenreModel } from '../../../../../genre/infra/db/sequelize/genre-model'
 import { GenreSequelizeRepository } from '../../../../../genre/infra/db/sequelize/genre-sequelize.repository';
 import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
 import { UnitOfWorkSequelize } from '../../../../../shared/infra/db/sequelize/unit-of-work-sequelize';
-import { Video, VideoId } from '../../../../domain/patient.aggregate';
+import { Video, VideoId } from '../../../../domain/video.aggregate';
 import {
   VideoSearchParams,
   VideoSearchResult,

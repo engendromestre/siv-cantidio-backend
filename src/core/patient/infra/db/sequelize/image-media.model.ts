@@ -41,8 +41,8 @@ export class ImageMediaModel extends Model<ImageMediaModelProps> {
 
   @ForeignKey(() => PatientModel)
   @Column({ allowNull: false, type: DataType.UUID })
-  declare video_id: string;
+  declare patient_id: string;
 
   @Column({ allowNull: false, type: DataType.STRING(20) })
-  declare video_related_field: ImageMediaRelatedField;
+  declare patient_related_field: ImageMediaRelatedField;
 }

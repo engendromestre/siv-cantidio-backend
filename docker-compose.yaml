@@ -16,7 +16,7 @@ services:
   db:
     image: mysql:8.0.30-debian
     environment:
-      - MYSQL_DATABASE=admi_siv
+      - MYSQL_DATABASE=adm_siv
       - MYSQL_ROOT_PASSWORD=root
     # volumes:
     #   - ./.docker/mysql:/docker-entrypoint-initdb.d

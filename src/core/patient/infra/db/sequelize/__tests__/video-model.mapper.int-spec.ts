@@ -15,13 +15,13 @@ import { GenreSequelizeRepository } from '../../../../../genre/infra/db/sequeliz
 import { LoadEntityError } from '../../../../../shared/domain/validators/validation.error';
 import { AudioVideoMediaStatus } from '../../../../../shared/domain/value-objects/audio-video-media.vo';
 import { UnitOfWorkFakeInMemory } from '../../../../../shared/infra/db/in-memory/fake-unit-of-work-in-memory';
-import { Banner } from '../../../../domain/photo.vo';
+import { Banner } from '../../../../domain/banner.vo';
 import { Rating, RatingValues } from '../../../../domain/rating.vo';
 import { ThumbnailHalf } from '../../../../domain/thumbnail-half.vo';
 import { Thumbnail } from '../../../../domain/thumbnail.vo';
 import { Trailer } from '../../../../domain/trailer.vo';
 import { VideoMedia } from '../../../../domain/video-media.vo';
-import { Video, VideoId } from '../../../../domain/patient.aggregate';
+import { Video, VideoId } from '../../../../domain/video.aggregate';
 import {
   AudioVideoMediaModel,
   AudioVideoMediaRelatedField,

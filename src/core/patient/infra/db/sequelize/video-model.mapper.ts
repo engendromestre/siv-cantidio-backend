@@ -1,25 +1,36 @@
-import { Video, VideoId } from '../../../domain/patient.aggregate';
+import { Video, VideoId } from '../../../domain/video.aggregate';
 import { LoadEntityError } from '../../../../shared/domain/validators/validation.error';
 import { CategoryId } from '../../../../category/domain/category.aggregate';
 import { Notification } from '../../../../shared/domain/validators/notification';
 import { GenreId } from '../../../../genre/domain/genre.aggregate';
+import { CastMemberId } from '../../../../cast-member/domain/cast-member.aggregate';
+import { Rating } from '../../../domain/rating.vo';
+import {
+  VideoCastMemberModel,
+  VideoCategoryModel,
+  VideoGenreModel,
+  VideoModel,
+} from './patient.model';
 import { ImageMediaModel, ImageMediaRelatedField } from './image-media.model';
 import {
   AudioVideoMediaModel,
   AudioVideoMediaRelatedField,
 } from './audio-video-media.model';
-import { Banner } from '../../../domain/photo.vo';
+import { Banner } from '../../../domain/banner.vo';
 import { Thumbnail } from '../../../domain/thumbnail.vo';
 import { ThumbnailHalf } from '../../../domain/thumbnail-half.vo';
-import { PatientModel } from './patient.model';
+import { Trailer } from '../../../domain/trailer.vo';
+import { VideoMedia } from '../../../domain/video-media.vo';
 
-export class PatientModelMapper {
-  static toEntity(model: PatientModel) {
+export class VideoModelMapper {
+  static toEntity(model: VideoModel) {
     const {
-      patient_id: id,
+      video_id: id,
       categories_id = [],
       genres_id = [],
+      cast_members_id = [],
       image_medias = [],
+      audio_video_medias = [],
       ...otherData
     } = model.toJSON();
 
@@ -27,6 +38,9 @@ export class PatientModelMapper {
       (c) => new CategoryId(c.category_id),
     );
     const genresId = genres_id.map((c) => new GenreId(c.genre_id));
+    const castMembersId = cast_members_id.map(
+      (c) => new CastMemberId(c.cast_member_id),
+    );
 
     const notification = new Notification();
     if (!categoriesId.length) {
@@ -37,6 +51,13 @@ export class PatientModelMapper {
     }
     if (!genresId.length) {
       notification.addError('genres_id should not be empty', 'genres_id');
+    }
+
+    if (!castMembersId.length) {
+      notification.addError(
+        'cast_members_id should not be empty',
+        'cast_members_id',
+      );
     }
 
     const bannerModel = image_medias.find(
@@ -70,10 +91,42 @@ export class PatientModelMapper {
       })
       : null;
 
+    const trailerModel = audio_video_medias.find(
+      (i) => i.video_related_field === 'trailer',
+    );
 
-    const patientEntity = new Video({
+    const trailer = trailerModel
+      ? new Trailer({
+        name: trailerModel.name,
+        raw_location: trailerModel.raw_location,
+        encoded_location: trailerModel.encoded_location,
+        status: trailerModel.status,
+      })
+      : null;
+
+    const videoModel = audio_video_medias.find(
+      (i) => i.video_related_field === 'video',
+    );
+
+    const videoMedia = videoModel
+      ? new VideoMedia({
+        name: videoModel.name,
+        raw_location: videoModel.raw_location,
+        encoded_location: videoModel.encoded_location,
+        status: videoModel.status,
+      })
+      : null;
+
+    const [rating, errorRating] = Rating.create(otherData.rating).asArray();
+
+    if (errorRating) {
+      notification.addError(errorRating.message, 'rating');
+    }
+
+    const videoEntity = new Video({
       ...otherData,
-      patient_id: new VideoId(id),
+      rating,
+      video_id: new VideoId(id),
       banner,
       thumbnail,
       thumbnail_half: thumbnailHalf,
