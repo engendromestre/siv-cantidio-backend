@@ -13,8 +13,8 @@ export type PatientConstructorProps = {
   patient_id_siresp: string;
   patient_chart_number?: string | null;
   full_name: string;
-  mother_full_name: string;
-  birthdate: Date;
+  mother_full_name?: string | null;
+  birthdate?: Date | null;
   is_opened: boolean;
   is_published: boolean;
 
@@ -29,10 +29,10 @@ export type PatientConstructorProps = {
 
 export type PatientCreateCommand = {
   patient_id_siresp: string;
-  patient_chart_number: string;
+  patient_chart_number?: string;
   full_name: string;
-  mother_full_name: string;
-  birthdate: Date;
+  mother_full_name?: string;
+  birthdate?: Date;
   is_opened: boolean;
 
   photo?: Photo;
@@ -50,8 +50,8 @@ export class Patient extends AggregateRoot {
   patient_id_siresp: string;
   patient_chart_number: string | null;
   full_name: string;
-  mother_full_name: string;
-  birthdate: Date;
+  mother_full_name: string | null;
+  birthdate: Date | null;
   is_opened: boolean;
   is_published: boolean; //uploads
 
@@ -64,14 +64,15 @@ export class Patient extends AggregateRoot {
 
   created_at: Date;
 
+  
   constructor(props: PatientConstructorProps) {
     super();
     this.patient_id = props.patient_id ?? new PatientId();
     this.patient_id_siresp = props.patient_id_siresp;
     this.patient_chart_number = props.patient_chart_number ?? null;
     this.full_name = props.full_name;
-    this.mother_full_name = props.mother_full_name;
-    this.birthdate = props.birthdate;
+    this.mother_full_name = props.mother_full_name ?? null;
+    this.birthdate = props.birthdate ?? null;
     this.is_opened = props.is_opened;
     this.is_published = props.is_published;
 
@@ -171,6 +172,7 @@ export class Patient extends AggregateRoot {
   // check
   validate(fields?: string[]) {
     const validator = PatientValidatorFactory.create();
+    
     return validator.validate(this.notification, this, fields);
   }
 

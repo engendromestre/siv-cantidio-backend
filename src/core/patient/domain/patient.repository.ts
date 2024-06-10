@@ -60,7 +60,7 @@ export class PatientSearchParams extends SearchParams<PatientFilter> {
 
         const filter = {
             ...(_value?.patient_id_siresp && { patient_id_siresp: `${_value?.patient_id_siresp}` }),
-            ...(_value?.full_name && { title: `${_value?.full_name}` }),
+            ...(_value?.full_name && { full_name: `${_value?.full_name}` }),
             ...(_value?.categories_id &&
                 _value.categories_id.length && {
                 categories_id: _value.categories_id,

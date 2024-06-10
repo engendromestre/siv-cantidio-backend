@@ -19,7 +19,7 @@ describe('Photo Unit Tests', () => {
     expect(error).toBeNull();
     expect(photo).toBeInstanceOf(Photo);
     expect(photo.name).toMatch(/\.png$/);
-    expect(photo.location).toBe(`patients/${patientId.id}/photos`);
+    expect(photo.location).toBe(`patients/${patientId.id}/images`);
   });
 
   it('should throw an error if the file size is too large', () => {

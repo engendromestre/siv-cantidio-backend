@@ -4,13 +4,14 @@ import { Patient } from './patient.aggregate';
 import { Notification } from '../../shared/domain/validators/notification';
 
 export class PatientRules {
-  @MinLength(205, { groups: ['patient_aggregate'] })
+  @MinLength(5, { groups: ['patient_id_siresp'] })
+  @MaxLength(5, { groups: ['patient_id_siresp'] })
   patient_id_siresp: string;
-
-  @MaxLength(255, { groups: ['patient_aggregate'] })
+  
+  @MaxLength(255, { groups: ['full_name'] })
   full_name: string;
 
-  @MaxLength(255, { groups: ['patient_aggregate'] })
+  @MaxLength(255, { groups: ['mother_full_name'] })
   mother_full_name: string;
 
   constructor(aggregate: Patient) {

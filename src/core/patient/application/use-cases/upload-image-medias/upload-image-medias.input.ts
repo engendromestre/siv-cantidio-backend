@@ -8,8 +8,8 @@ import {
 import { FileMediaInput } from '../common/file-media.input';
 
 export type UploadImageMediasInputConstructorProps = {
-  video_id: string;
-  field: string; //banner, thumbnail, thumbnail_half
+  patient_id: string;
+  field: string; //photo, thumbnail, thumbnail_half
   file: FileMediaInput;
 };
 
@@ -17,11 +17,11 @@ export class UploadImageMediasInput {
   //@IsUUID('4', { each: true })
   @IsString()
   @IsNotEmpty()
-  video_id: string;
+  patient_id: string;
 
-  @IsIn(['banner', 'thumbnail', 'thumbnail_half'])
+  @IsIn(['photo', 'thumbnail', 'thumbnail_half'])
   @IsNotEmpty()
-  field: 'banner' | 'thumbnail' | 'thumbnail_half'; //banner, thumbnail, thumbnail_half
+  field: 'photo' | 'thumbnail' | 'thumbnail_half'; //banner, thumbnail, thumbnail_half
 
   @ValidateNested()
   file: FileMediaInput;
@@ -29,7 +29,7 @@ export class UploadImageMediasInput {
   constructor(props: UploadImageMediasInput) {
     if (!props) return;
 
-    this.video_id = props.video_id;
+    this.patient_id = props.patient_id;
     this.field = props.field;
     this.file = props.file;
   }

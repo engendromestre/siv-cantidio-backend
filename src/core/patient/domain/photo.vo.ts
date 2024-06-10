@@ -31,7 +31,7 @@ export class Photo extends ImageMedia {
       });
       return new Photo({
         name: newName,
-        location: `patients/${patient_id.id}/photos`,
+        location: `patients/${patient_id.id}/images`,
       });
     });
   }

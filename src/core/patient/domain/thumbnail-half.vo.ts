@@ -5,7 +5,7 @@ import {
   MediaFileValidator,
 } from '../../shared/domain/validators/media-file.validator';
 import { ImageMedia } from '../../shared/domain/value-objects/image-media.vo';
-import { VideoId } from './patient.aggregate';
+import { PatientId } from './patient.aggregate';
 
 export class ThumbnailHalf extends ImageMedia {
   static max_size = 1024 * 1024 * 2;
@@ -15,12 +15,12 @@ export class ThumbnailHalf extends ImageMedia {
     raw_name,
     mime_type,
     size,
-    video_id,
+    patient_id,
   }: {
     raw_name: string;
     mime_type: string;
     size: number;
-    video_id: VideoId;
+    patient_id: PatientId;
   }) {
     const mediaFileValidator = new MediaFileValidator(
       ThumbnailHalf.max_size,
@@ -36,8 +36,8 @@ export class ThumbnailHalf extends ImageMedia {
         size,
       });
       return new ThumbnailHalf({
-        name: `${video_id.id}-${name}`,
-        location: `videos/${video_id.id}/images`,
+        name: `${patient_id.id}-${name}`,
+        location: `videos/${patient_id.id}/images`,
       });
     });
   }

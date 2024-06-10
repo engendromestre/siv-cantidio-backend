@@ -53,10 +53,10 @@ describe('PatientFakerBuilder Unit Tests', () => {
     });
   });
 
-  describe('patient_id_siresp prop', () => {
+  describe('full_name prop', () => {
     const faker = PatientFakeBuilder.aPatientWithoutMedias();
     test('should be a function', () => {
-      expect(typeof faker['_patient_id_siresp']).toBe('function');
+      expect(typeof faker['_full_name']).toBe('function');
     });
 
     test('should call the name method', () => {
@@ -79,14 +79,14 @@ describe('PatientFakerBuilder Unit Tests', () => {
 
 
     test('withPatientIdSiresp', () => {
-      const $this = faker.withPatientIdSiresp(12345);
+      const $this = faker.withPatientIdSiresp("12345");
       expect($this).toBeInstanceOf(PatientFakeBuilder);
-      expect(faker['_patient_id_siresp']).toBe(12345);
+      expect(faker['_patient_id_siresp']).toBe("12345");
 
-      faker.withPatientIdSiresp(() => 12345);
+      faker.withPatientIdSiresp(() => "12345");
 
       // @ts-expect-error
-      expect(faker['_patient_id_siresp']()).toBe(12345);
+      expect(faker['_patient_id_siresp']()).toBe("12345");
       expect(faker.patient_id_siresp).toBe("12345");
     });
   });

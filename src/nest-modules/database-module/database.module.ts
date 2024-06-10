@@ -9,27 +9,21 @@ import {
   GenreCategoryModel,
   GenreModel,
 } from '../../core/genre/infra/db/sequelize/genre-model';
-import { CastMemberModel } from '../../core/cast-member/infra/db/sequelize/cast-member-sequelize';
 import {
-  VideoCastMemberModel,
-  VideoCategoryModel,
-  VideoGenreModel,
-  VideoModel,
+  PatientCategoryModel,
+  PatientGenreModel,
+  PatientModel,
 } from '../../core/patient/infra/db/sequelize/patient.model';
 import { ImageMediaModel } from '../../core/patient/infra/db/sequelize/image-media.model';
-import { AudioVideoMediaModel } from '../../core/patient/infra/db/sequelize/audio-video-media.model';
 
 const models = [
   CategoryModel,
   GenreModel,
   GenreCategoryModel,
-  CastMemberModel,
-  VideoModel,
-  VideoCategoryModel,
-  VideoCastMemberModel,
-  VideoGenreModel,
+  PatientModel,
+  PatientCategoryModel,
+  PatientGenreModel,
   ImageMediaModel,
-  AudioVideoMediaModel,
 ];
 
 @Global()
