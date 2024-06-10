@@ -50,24 +50,27 @@ export class PatientFakeBuilder<TBuild = any> {
 
   static aPatientWithoutMedias() {
     return new PatientFakeBuilder<Patient>()
+      .withPatientIdSiresp("12345")
       .withoutPhoto()
       .withoutThumbnail()
       .withoutThumbnailHalf()
   }
 
   static aPatientWithAllMedias() {
-    return new PatientFakeBuilder<Patient>();
+    return new PatientFakeBuilder<Patient>()
+    .withPatientIdSiresp("12345");
   }
 
   static thePatientsWithoutMedias(countObjs: number) {
     return new PatientFakeBuilder<Patient[]>(countObjs)
+      .withPatientIdSiresp("12345")
       .withoutPhoto()
       .withoutThumbnail()
       .withoutThumbnailHalf();
   }
 
   static thePatientsWithAllMedias(countObjs: number) {
-    return new PatientFakeBuilder<Patient[]>(countObjs);
+    return new PatientFakeBuilder<Patient[]>(countObjs).withPatientIdSiresp("12345");
   }
 
   private chance: Chance.Chance;
@@ -231,7 +234,7 @@ export class PatientFakeBuilder<TBuild = any> {
     const photo = this.getValue('photo');
     return (
       photo ??
-      new photo({
+      new Photo({
         name: 'test-name-photo.png',
         location: 'test path photo',
       })

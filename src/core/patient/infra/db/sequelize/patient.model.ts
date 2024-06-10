@@ -17,8 +17,8 @@ export type PatientModelProps = {
   patient_id_siresp: string;
   patient_chart_number?: string | null;
   full_name: string;
-  mother_full_name: string;
-  birthdate: Date;
+  mother_full_name?: string;
+  birthdate?: Date;
   is_opened: boolean;
   is_published: boolean;
 
