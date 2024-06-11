@@ -28,4 +28,8 @@ import { GenresModule } from '../genres-module/genres.module';
     ...Object.values(PATIENTS_PROVIDERS.USE_CASES),
   ],
 })
+<<<<<<< HEAD
 export class VideosModule { }
+=======
+export class PatientsModule { }
+>>>>>>> fix-patient-sequelize

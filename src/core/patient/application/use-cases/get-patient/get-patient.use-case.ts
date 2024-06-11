@@ -9,14 +9,22 @@ import { PatientOutput, PatientOutputMapper } from '../common/patient-output';
 export class GetPatientUseCase
   implements IUseCase<GetPatientInput, GetPatientOutput> {
   constructor(
+<<<<<<< HEAD
     private videoRepo: IPatientRepository,
+=======
+    private patientRepo: IPatientRepository,
+>>>>>>> fix-patient-sequelize
     private categoryRepo: ICategoryRepository,
     private genreRepo: IGenreRepository,
   ) { }
 
   async execute(input: GetPatientInput): Promise<GetPatientOutput> {
     const patientId = new PatientId(input.id);
+<<<<<<< HEAD
     const patient = await this.videoRepo.findById(patientId);
+=======
+    const patient = await this.patientRepo.findById(patientId);
+>>>>>>> fix-patient-sequelize
     if (!patient) {
       throw new NotFoundError(input.id, Patient);
     }

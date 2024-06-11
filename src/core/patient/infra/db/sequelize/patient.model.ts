@@ -17,8 +17,13 @@ export type PatientModelProps = {
   patient_id_siresp: string;
   patient_chart_number?: string | null;
   full_name: string;
+<<<<<<< HEAD
   mother_full_name?: string;
   birthdate?: Date;
+=======
+  mother_full_name?: string | null;
+  birthdate?: Date | null;
+>>>>>>> fix-patient-sequelize
   is_opened: boolean;
   is_published: boolean;
 
@@ -40,7 +45,7 @@ export class PatientModel extends Model<PatientModelProps> {
   @Column({ allowNull: false, type: DataType.STRING(5) })
   declare patient_id_siresp: string;
 
-  @Column({ allowNull: true, type: DataType.STRING(5) })
+  @Column({ allowNull: true,  type: DataType.STRING(5) })
   declare patient_chart_number: string;
 
   @Column({ allowNull: false, type: DataType.STRING(255) })

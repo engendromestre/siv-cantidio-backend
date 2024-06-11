@@ -15,9 +15,11 @@ export class PatientFakeBuilder<TBuild = any> {
   private _patient_id: PropOrFactory<PatientId> | undefined = undefined;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _patient_id_siresp: PropOrFactory<string> = (_index) =>
-    this.chance.word();
+    // @ts-ignore
+    this.chance.unique(this.chance.integer, 5, { min: 0, max: 9 }).join('').toString();
   private _patient_chart_number: PropOrFactory<string> = (_index) =>
-    this.chance.word();
+    // @ts-ignore
+    this.chance.unique(this.chance.integer, 5, { min: 0, max: 9 }).join('').toString();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private _full_name: PropOrFactory<string> = (_index) => this.chance.name({ nationality: 'it' });
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -74,6 +76,8 @@ export class PatientFakeBuilder<TBuild = any> {
   }
 
   private chance: Chance.Chance;
+
+
 
   private constructor(countObjs: number = 1) {
     this.countObjs = countObjs;
@@ -165,6 +169,15 @@ export class PatientFakeBuilder<TBuild = any> {
     return this;
   }
 
+  // Novo método para gerar strings sequenciais
+  generateRandomString(length: number = 5): string {
+    let randomString = '';
+    for (let i = 0; i < length; i++) {
+      randomString += this.chance.integer({ min: 0, max: 9 }).toString();
+    }
+    return randomString;
+  }
+
   build(): TBuild {
     const patients = new Array(this.countObjs).fill(undefined).map((_, index) => {
       const categoryId = new CategoryId();
@@ -207,11 +220,11 @@ export class PatientFakeBuilder<TBuild = any> {
   }
 
   get patient_id_siresp() {
-    return this.getValue('patient_id_siresp').toString();
+    return this.getValue('patient_id_siresp');
   }
 
   get patient_chart_number() {
-    return this.getValue('patient_chart_number').toString();
+    return this.getValue('patient_chart_number');
   }
 
   get full_name() {

@@ -20,6 +20,10 @@ import {
   PatientGenreModel,
   PatientModel,
 } from '../patient.model';
+<<<<<<< HEAD
+=======
+import { ConsoleLogger } from '@nestjs/common';
+>>>>>>> fix-patient-sequelize
 
 describe('PatientSequelizeRepository Integration Tests', () => {
   const sequelizeHelper = setupSequelizeForPatient();
@@ -43,6 +47,10 @@ describe('PatientSequelizeRepository Integration Tests', () => {
       .addCategoryId(category.category_id)
       .addGenreId(genre.genre_id)
       .build();
+<<<<<<< HEAD
+=======
+
+>>>>>>> fix-patient-sequelize
     await patientRepo.insert(patient);
     const newPatient = await patientRepo.findById(patient.patient_id);
     expect(newPatient!.toJSON()).toStrictEqual(patient.toJSON());
@@ -69,8 +77,15 @@ describe('PatientSequelizeRepository Integration Tests', () => {
       .addCategoryId(category.category_id)
       .addGenreId(genre.genre_id)
       .build();
+<<<<<<< HEAD
     await patientRepo.bulkInsert(patients);
     const newPatients = await patientRepo.findAll();
+=======
+
+    await patientRepo.bulkInsert(patients);
+    const newPatients = await patientRepo.findAll();
+
+>>>>>>> fix-patient-sequelize
     expect(newPatients.length).toBe(2);
     expect(newPatients[0].toJSON()).toStrictEqual(patients[0].toJSON());
     expect(newPatients[1].toJSON()).toStrictEqual(patients[1].toJSON());
@@ -281,7 +296,10 @@ describe('PatientSequelizeRepository Integration Tests', () => {
       const patients = [
         Patient.fake()
           .aPatientWithAllMedias()
+<<<<<<< HEAD
           .withPatientIdSiresp('12345')
+=======
+>>>>>>> fix-patient-sequelize
           .withFullName('test')
           .withCreatedAt(new Date(new Date().getTime() + 4000))
           .addCategoryId(category.category_id)
@@ -289,7 +307,10 @@ describe('PatientSequelizeRepository Integration Tests', () => {
           .build(),
         Patient.fake()
           .aPatientWithAllMedias()
+<<<<<<< HEAD
           .withPatientIdSiresp('12345')
+=======
+>>>>>>> fix-patient-sequelize
           .withFullName('a')
           .withCreatedAt(new Date(new Date().getTime() + 3000))
           .addCategoryId(category.category_id)
@@ -297,7 +318,10 @@ describe('PatientSequelizeRepository Integration Tests', () => {
           .build(),
         Patient.fake()
           .aPatientWithAllMedias()
+<<<<<<< HEAD
           .withPatientIdSiresp('12345')
+=======
+>>>>>>> fix-patient-sequelize
           .withFullName('TEST')
           .withCreatedAt(new Date(new Date().getTime() + 2000))
           .addCategoryId(category.category_id)
@@ -312,6 +336,10 @@ describe('PatientSequelizeRepository Integration Tests', () => {
           .addGenreId(genre.genre_id)
           .build(),
       ];
+<<<<<<< HEAD
+=======
+
+>>>>>>> fix-patient-sequelize
       await patientRepo.bulkInsert(patients);
 
       let searchOutput = await patientRepo.search(
@@ -371,7 +399,11 @@ describe('PatientSequelizeRepository Integration Tests', () => {
   });
 
   //TODO - fazer testes para buscas de categories_id, genres_id
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> fix-patient-sequelize
   describe('transaction mode', () => {
     describe('insert method', () => {
       it('should insert a genre', async () => {
@@ -409,7 +441,11 @@ describe('PatientSequelizeRepository Integration Tests', () => {
     });
 
     describe('bulkInsert method', () => {
+<<<<<<< HEAD
       it('should insert a list of videos', async () => {
+=======
+      it('should insert a list of patients', async () => {
+>>>>>>> fix-patient-sequelize
         const { category, genre } = await createRelations();
         const patients = Patient.fake()
           .thePatientsWithAllMedias(2)

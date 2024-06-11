@@ -7,7 +7,10 @@ import { IGenreRepository } from '../../../../../genre/domain/genre.repository';
 import { GenreModel } from '../../../../../genre/infra/db/sequelize/genre-model';
 import { GenreSequelizeRepository } from '../../../../../genre/infra/db/sequelize/genre-sequelize.repository';
 import { LoadEntityError } from '../../../../../shared/domain/validators/validation.error';
+<<<<<<< HEAD
 import { AudioVideoMediaStatus } from '../../../../../shared/domain/value-objects/audio-video-media.vo';
+=======
+>>>>>>> fix-patient-sequelize
 import { UnitOfWorkFakeInMemory } from '../../../../../shared/infra/db/in-memory/fake-unit-of-work-in-memory';
 import { Photo } from '../../../../domain/photo.vo';
 import { ThumbnailHalf } from '../../../../domain/thumbnail-half.vo';
@@ -111,7 +114,13 @@ describe('PatientModelMapper Unit Tests', () => {
       } as any,
       { include: ['categories_id', 'genres_id'] },
     );
+<<<<<<< HEAD
     let entity = PatientModelMapper.toEntity(model);
+=======
+
+    let entity = PatientModelMapper.toEntity(model);
+    
+>>>>>>> fix-patient-sequelize
     expect(entity.toJSON()).toEqual(
       new Patient({
         patient_id: new PatientId(model.patient_id),
@@ -124,10 +133,18 @@ describe('PatientModelMapper Unit Tests', () => {
           [category1.category_id.id, category1.category_id],
         ]),
         genres_id: new Map([[genre1.genre_id.id, genre1.genre_id]]),
+<<<<<<< HEAD
       }).toJSON(),
     );
 
     patientProps.patient_id = new PatientId().id;
+=======
+      }).toJSON()
+    );
+
+    patientProps.patient_id = new PatientId().id;
+
+>>>>>>> fix-patient-sequelize
     model = await PatientModel.create(
       {
         ...patientProps,
@@ -172,7 +189,10 @@ describe('PatientModelMapper Unit Tests', () => {
         ],
       },
     );
+<<<<<<< HEAD
 
+=======
+>>>>>>> fix-patient-sequelize
     entity = PatientModelMapper.toEntity(model);
     expect(entity.toJSON()).toEqual(
       new Patient({

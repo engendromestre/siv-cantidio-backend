@@ -37,7 +37,11 @@ export class ThumbnailHalf extends ImageMedia {
       });
       return new ThumbnailHalf({
         name: `${patient_id.id}-${name}`,
+<<<<<<< HEAD
         location: `videos/${patient_id.id}/images`,
+=======
+        location: `patients/${patient_id.id}/images`,
+>>>>>>> fix-patient-sequelize
       });
     });
   }

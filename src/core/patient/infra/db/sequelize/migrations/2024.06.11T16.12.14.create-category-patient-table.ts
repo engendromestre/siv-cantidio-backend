@@ -2,8 +2,8 @@ import { MigrationFn } from 'umzug';
 import { Sequelize, DataTypes } from 'sequelize';
 
 export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().createTable('category_video', {
-    video_id: {
+  await sequelize.getQueryInterface().createTable('category_patient', {
+    patient_id: {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
@@ -14,21 +14,21 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       primaryKey: true,
     },
   });
-  await sequelize.getQueryInterface().addConstraint('category_video', {
-    fields: ['video_id'],
+  await sequelize.getQueryInterface().addConstraint('category_patient', {
+    fields: ['patient_id'],
     type: 'foreign key',
-    name: 'category_video_video_id',
+    name: 'category_patient_patient_id',
     references: {
-      table: 'videos',
-      field: 'video_id',
+      table: 'patients',
+      field: 'patient_id',
     },
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
   });
-  await sequelize.getQueryInterface().addConstraint('category_video', {
+  await sequelize.getQueryInterface().addConstraint('category_patient', {
     fields: ['category_id'],
     type: 'foreign key',
-    name: 'category_video_category_id',
+    name: 'category_patient_category_id',
     references: {
       table: 'categories',
       field: 'category_id',
@@ -40,9 +40,9 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
   await sequelize
     .getQueryInterface()
-    .removeConstraint('category_video', 'category_video_video_id');
+    .removeConstraint('category_patient', 'category_patient_patient_id');
   await sequelize
     .getQueryInterface()
-    .removeConstraint('category_video', 'category_video_category_id');
-  await sequelize.getQueryInterface().dropTable('category_video');
+    .removeConstraint('category_patient', 'category_patient_category_id');
+  await sequelize.getQueryInterface().dropTable('category_patient');
 };

@@ -19,7 +19,14 @@ import { CreatePatientDto } from './dto/create-patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { UpdatePatientInput } from '@core/patient/application/use-cases/update-patient/update-patient.input';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
+<<<<<<< HEAD
 
+=======
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+@ApiTags('patients')
+@ApiBearerAuth()
+>>>>>>> fix-patient-sequelize
 @Controller('patients')
 export class PatientsController {
   @Inject(CreatePatientUseCase)

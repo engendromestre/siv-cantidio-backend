@@ -16,23 +16,23 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    video_id: {
+    patient_id: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    video_related_field: {
+    patient_related_field: {
       type: DataTypes.STRING(20),
       allowNull: false,
     },
   });
 
   await sequelize.getQueryInterface().addConstraint('image_medias', {
-    fields: ['video_id'],
+    fields: ['patient_id'],
     type: 'foreign key',
-    name: 'image_medias_video_id',
+    name: 'image_medias_patient_id',
     references: {
-      table: 'videos',
-      field: 'video_id',
+      table: 'patients',
+      field: 'patient_id',
     },
     onDelete: 'RESTRICT',
     onUpdate: 'RESTRICT',
@@ -41,6 +41,6 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
   await sequelize
     .getQueryInterface()
-    .removeConstraint('image_medias', 'image_medias_video_id');
+    .removeConstraint('image_medias', 'image_medias_patient_id');
   await sequelize.getQueryInterface().dropTable('image_medias');
 };

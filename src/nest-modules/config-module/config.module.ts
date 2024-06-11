@@ -73,16 +73,16 @@ export const CONFIG_GOOGLE_SCHEMA: Joi.StrictSchemaMap<CONFIG_GOOGLE_SCHEMA_TYPE
     GOOGLE_CLOUD_STORAGE_BUCKET_NAME: Joi.string().required(),
   };
 
-type CONFIG_RABBITMQ_SCHEMA_TYPE = {
-  RABBITMQ_URI: string;
-  RABBITMQ_REGISTER_HANDLERS: boolean;
-};
+// type CONFIG_RABBITMQ_SCHEMA_TYPE = {
+//   RABBITMQ_URI: string;
+//   RABBITMQ_REGISTER_HANDLERS: boolean;
+// };
 
-export const CONFIG_RABBITMQ_SCHEMA: Joi.StrictSchemaMap<CONFIG_RABBITMQ_SCHEMA_TYPE> =
-  {
-    RABBITMQ_URI: Joi.string().required(),
-    RABBITMQ_REGISTER_HANDLERS: Joi.boolean().required(),
-  };
+// export const CONFIG_RABBITMQ_SCHEMA: Joi.StrictSchemaMap<CONFIG_RABBITMQ_SCHEMA_TYPE> =
+//   {
+//     RABBITMQ_URI: Joi.string().required(),
+//     RABBITMQ_REGISTER_HANDLERS: Joi.boolean().required(),
+//   };
 
 type CONFIG_JWT_SCHEMA_TYPE = {
   JWT_PUBLIC_KEY: string;
@@ -108,7 +108,6 @@ export class ConfigModule extends NestConfigModule {
       validationSchema: Joi.object({
         ...CONFIG_DB_SCHEMA,
         ...CONFIG_GOOGLE_SCHEMA,
-        ...CONFIG_RABBITMQ_SCHEMA,
         ...CONFIG_JWT_SCHEMA,
       }),
       ...otherOptions,

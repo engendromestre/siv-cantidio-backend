@@ -22,7 +22,10 @@ import { GetGenreUseCase } from '../../core/genre/application/use-cases/get-genr
 import { ListGenresUseCase } from '../../core/genre/application/use-cases/list-genres/list-genres.use-case';
 import { UpdateGenreInput } from '../../core/genre/application/use-cases/update-genre/update-genre.input';
 import { GenreOutput } from '../../core/genre/application/use-cases/common/genre-output';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('genres')
+@ApiBearerAuth()
 @Controller('genres')
 export class GenresController {
   @Inject(CreateGenreUseCase)

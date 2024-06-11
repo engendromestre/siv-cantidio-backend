@@ -86,7 +86,10 @@ export class PatientModelMapper {
     notification.copyErrors(patientEntity.notification);
 
     if (notification.hasErrors()) {
+<<<<<<< HEAD
       console.log(notification.toJSON());
+=======
+>>>>>>> fix-patient-sequelize
       throw new LoadEntityError(notification.toJSON());
     }
 
