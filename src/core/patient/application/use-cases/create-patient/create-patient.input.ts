@@ -1,14 +1,15 @@
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsNotEmpty,
   IsString,
   IsArray,
   IsUUID,
-  Min,
-  Max,
   validateSync,
   IsDate,
   IsOptional,
+  MinLength,
+  MaxLength,
 } from 'class-validator';
 
 export type CreatePatientInputConstructorProps = {
@@ -26,30 +27,31 @@ export type CreatePatientInputConstructorProps = {
 export class CreatePatientInput {
   @IsString()
   @IsNotEmpty()
-  @Min(5)
-  @Max(5)
+  @MinLength(5)
+  @MaxLength(5)
   patient_id_siresp: string;
 
   @IsString()
   @IsOptional()
-  @Min(5)
-  @Max(5)
+  @MinLength(5)
+  @MaxLength(5)
   patient_chart_number: string;
 
   @IsString()
   @IsNotEmpty()
-  @Min(5)
-  @Max(255)
+  @MinLength(5)
+  @MaxLength(255)
   full_name: string;
 
   @IsString()
   @IsOptional()
-  @Min(5)
-  @Max(255)
+  @MinLength(5)
+  @MaxLength(255)
   mother_full_name: string;
 
   @IsDate()
-  @IsNotEmpty()
+  @Type(() => Date)
+  @IsOptional()
   birthdate: Date;
 
   @IsBoolean()

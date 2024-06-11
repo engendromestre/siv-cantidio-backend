@@ -27,7 +27,10 @@ import { CategoryOutput } from '../../core/category/application/use-cases/common
 import { SearchCategoriesDto } from './dto/search-categories.dto';
 import { AuthGuard } from '../auth-module/auth.guard';
 import { CheckIsAdminGuard } from '../auth-module/check-is-admin.guard';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('categories')
+@ApiBearerAuth()
 @UseGuards(AuthGuard, CheckIsAdminGuard)
 @Controller('categories')
 export class CategoriesController {
