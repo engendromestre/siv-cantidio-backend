@@ -86,7 +86,7 @@ export class PatientModelMapper {
     notification.copyErrors(patientEntity.notification);
 
     if (notification.hasErrors()) {
-      // console.log(notification.toJSON());
+      console.log(notification.toJSON());
       throw new LoadEntityError(notification.toJSON());
     }
 

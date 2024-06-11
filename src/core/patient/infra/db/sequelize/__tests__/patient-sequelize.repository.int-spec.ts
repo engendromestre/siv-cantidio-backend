@@ -411,7 +411,7 @@ describe('PatientSequelizeRepository Integration Tests', () => {
     });
 
     describe('bulkInsert method', () => {
-      it('should insert a list of videos', async () => {
+      it('should insert a list of patients', async () => {
         const { category, genre } = await createRelations();
         const patients = Patient.fake()
           .thePatientsWithAllMedias(2)

@@ -14,20 +14,21 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
       unique: true,
     },
     patient_chart_number: {
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(5),
+      allowNull: true,
+      unique: true,
+    },
+    full_name: {
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
-    year_launched: {
-      type: DataTypes.SMALLINT,
-      allowNull: false,
+    mother_full_name: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
     },
-    duration: {
-      type: DataTypes.SMALLINT,
-      allowNull: false,
-    },
-    rating: {
-      type: DataTypes.ENUM(...Object.values(RatingValues)),
-      allowNull: false,
+    birthdate: {
+      type: DataTypes.DATE(6),
+      allowNull: true,
     },
     is_opened: {
       type: DataTypes.BOOLEAN,
@@ -44,5 +45,5 @@ export const up: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
   });
 };
 export const down: MigrationFn<Sequelize> = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable('videos');
+  await sequelize.getQueryInterface().dropTable('patients');
 };

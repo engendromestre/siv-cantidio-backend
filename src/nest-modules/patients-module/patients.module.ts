@@ -28,4 +28,4 @@ import { GenresModule } from '../genres-module/genres.module';
     ...Object.values(PATIENTS_PROVIDERS.USE_CASES),
   ],
 })
-export class VideosModule { }
+export class PatientsModule { }

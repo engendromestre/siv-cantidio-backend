@@ -9,14 +9,14 @@ import { PatientOutput, PatientOutputMapper } from '../common/patient-output';
 export class GetPatientUseCase
   implements IUseCase<GetPatientInput, GetPatientOutput> {
   constructor(
-    private videoRepo: IPatientRepository,
+    private patientRepo: IPatientRepository,
     private categoryRepo: ICategoryRepository,
     private genreRepo: IGenreRepository,
   ) { }
 
   async execute(input: GetPatientInput): Promise<GetPatientOutput> {
     const patientId = new PatientId(input.id);
-    const patient = await this.videoRepo.findById(patientId);
+    const patient = await this.patientRepo.findById(patientId);
     if (!patient) {
       throw new NotFoundError(input.id, Patient);
     }

@@ -37,10 +37,10 @@ export class PatientModel extends Model<PatientModelProps> {
   @Column({ type: DataType.UUID })
   declare patient_id: string;
 
-  @Column({ allowNull: false, unique: true, type: DataType.STRING(5) })
+  @Column({ allowNull: false, type: DataType.STRING(5) })
   declare patient_id_siresp: string;
 
-  @Column({ allowNull: true,  unique: true, type: DataType.STRING(5) })
+  @Column({ allowNull: true,  type: DataType.STRING(5) })
   declare patient_chart_number: string;
 
   @Column({ allowNull: false, type: DataType.STRING(255) })

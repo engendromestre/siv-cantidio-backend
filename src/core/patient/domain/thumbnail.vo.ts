@@ -37,7 +37,7 @@ export class Thumbnail extends ImageMedia {
       });
       return new Thumbnail({
         name: `${patient_id.id}-${name}`,
-        location: `videos/${patient_id.id}/images`,
+        location: `patients/${patient_id.id}/images`,
       });
     });
   }

@@ -6,7 +6,6 @@ import {
 } from '../patient.model';
 import { ImageMediaModel, ImageMediaRelatedField } from '../image-media.model';
 import { PatientId } from '../../../../domain/patient.aggregate';
-import { AudioVideoMediaStatus } from '../../../../../shared/domain/value-objects/audio-video-media.vo';
 import { Category } from '../../../../../category/domain/category.aggregate';
 import { Genre } from '../../../../../genre/domain/genre.aggregate';
 import { setupSequelizeForPatient } from '../testing/helpers';

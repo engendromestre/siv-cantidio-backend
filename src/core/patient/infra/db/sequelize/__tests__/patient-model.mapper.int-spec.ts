@@ -110,7 +110,9 @@ describe('PatientModelMapper Unit Tests', () => {
       } as any,
       { include: ['categories_id', 'genres_id'] },
     );
+
     let entity = PatientModelMapper.toEntity(model);
+    
     expect(entity.toJSON()).toEqual(
       new Patient({
         patient_id: new PatientId(model.patient_id),
@@ -123,10 +125,11 @@ describe('PatientModelMapper Unit Tests', () => {
           [category1.category_id.id, category1.category_id],
         ]),
         genres_id: new Map([[genre1.genre_id.id, genre1.genre_id]]),
-      }).toJSON(),
+      }).toJSON()
     );
 
     patientProps.patient_id = new PatientId().id;
+
     model = await PatientModel.create(
       {
         ...patientProps,
@@ -171,7 +174,6 @@ describe('PatientModelMapper Unit Tests', () => {
         ],
       },
     );
-
     entity = PatientModelMapper.toEntity(model);
     expect(entity.toJSON()).toEqual(
       new Patient({
