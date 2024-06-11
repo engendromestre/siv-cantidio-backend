@@ -15,7 +15,6 @@ services:
       - "host.docker.internal:host-gateway"
     depends_on:
       - db
-      - rabbitmq
     environment:
       - GOOGLE_CLOUD_STORAGE_BUCKET_NAME
       - GOOGLE_CLOUD_CREDENTIALS
