@@ -1,0 +1,41 @@
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    restart: on-failure
+    ports:
+      - 3000:3000
+    volumes:
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
+      - ./envs:/home/node/app/envs
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - db
+<<<<<<< HEAD
+    environment:
+      - GOOGLE_CLOUD_STORAGE_BUCKET_NAME
+      - GOOGLE_CLOUD_CREDENTIALS
+=======
+>>>>>>> ddf7011 (feature symbol)
+
+  db:
+    image: mysql:8.0.30-debian
+    environment:
+<<<<<<< HEAD
+      - MYSQL_DATABASE=adm_siv
+=======
+      - MYSQL_DATABASE=siv
+>>>>>>> ddf7011 (feature symbol)
+      - MYSQL_ROOT_PASSWORD=root
+    tmpfs:
+      - /var/lib/mysql
+    security_opt:
+<<<<<<< HEAD
+      - seccomp:unconfined
+=======
+      - seccomp:unconfined
+>>>>>>> ddf7011 (feature symbol)

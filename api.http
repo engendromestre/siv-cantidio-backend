@@ -1,0 +1,136 @@
+## valid uuid = 8f4b7b9c-3f7a-4b6c-8b0c-1c9c5b8b9b6a
+
+### 
+# @name createCategory
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+    "id": "b91a21e5-3083-4aac-bf7c-80c816c5eef7",
+    "name": "Comédia",
+    "description": "Filmes leves e divertidos"
+}
+
+###
+
+@categoryId = {{createCategory.response.body.data.id}}
+
+###
+GET http://localhost:3000/categories
+Authorization: Bearer {{jwtToken}}
+
+###
+GET http://localhost:3000/categories/8f4b7b9c-3f7a-4b6c-8b0c-1c9c5b8b9b6a
+
+
+### 
+# @name createGenre
+POST http://localhost:3000/genres
+Content-Type: application/json
+
+{
+    "name": "Genre 1",
+    "categories_id": [
+        "{{categoryId}}"
+    ]
+}
+
+###
+
+@genreId = {{createGenre.response.body.data.id}}
+
+
+###
+# @name createPatient
+POST http://localhost:3000/patients
+Content-Type: application/json
+
+{
+    "patient_id_siresp": "12345",
+    "full_name": "Test Full Name",
+    "is_opened": false,
+    "categories_id": [
+        "{{categoryId}}"
+    ],
+    "genres_id": [
+        "{{genreId}}"
+    ]
+}
+
+###
+
+@patientId = {{createPatient.response.body.data.id}}
+
+###
+
+GET http://localhost:3000/patients/{{patientId}}
+
+
+###
+# @name updatePatient
+PATCH http://localhost:3000/patients/{{patientId}}
+Content-Type: application/json
+
+{
+    "patient_id_siresp": "12345",
+    "full_name": "Test Full Name",
+    "mother_full_name": "Test Mother Full Name",
+    "birthdate": "2000-01-01T00:00:00.000Z",
+    "is_opened": false,
+    "categories_id": [
+        "{{categoryId}}"
+    ],
+    "genres_id": [
+        "{{genreId}}"
+    ]
+}
+
+###
+
+###
+# @name uploadPatient
+PATCH http://localhost:3000/patients/{{patientId}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1234
+
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="image"; filename="image.png"
+Content-Type: image/png
+
+< ./image-test.png
+------WebKitFormBoundary1234--
+
+###
+
+### Estou usando host.docker.internal, porque no momento o dev container com rest client está fazendo requisição de dentro do container, 
+### então por localhost:8080 não funciona, mas se estiver usando o rest client fora do container, pode usar localhost:8080
+POST http://host.docker.internal:8080/realms/siv-cantidio/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+username=admin@admin.com
+&password=secret
+&grant_type=password
+&client_id=siv-admin-frontend
+
+### configuração do openid connect server
+GET http://host.docker.internal:8080/realms/siv-cantidio/.well-known/openid-configuration
+
+### certificados
+GET http://host.docker.internal:8080/realms/siv-cantidio/protocol/openid-connect/certs
+
+###
+POST http://localhost:3000/auth
+Content-Type: application/json
+
+{
+    "email": "admin@admin.com",
+    "password": "secret"
+}
+
+###
+
+@jwtToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tY2F0YWxvZyJdfSwiaWF0IjoxNzE4MTI3OTgwLCJleHAiOjE3MTgyMTQzODB9.djb3Km6ymAjNgLRoJkicWEadKvAAgFkNFg7j03-ztAuVm7qhp63B8hoFbCYsm1o3iv26l2OPvzB4gfTi7pzKC-VCnCL3YVqjVxBI_y_dX2mIrLHj7NxbkfNEJj8H9EYQl_75vhhR8FXuc1ed0aOQrbHu3yPw1ryKlAVGZSZyVZD7V4aZg_ym2m520Fs3Bx92RthqsJPN2JJ0mdesZrA1_46HPXWeCzZPOcllOxsQUfHupMZcwU4UAIEUp_lGKQHWz419a7CMZIGkG6pYTJBmSq_pv0_8m7B19sdXp5X6_F9WIiJ2I7pB1AOXgEap6l9QWHYB3-CZXAJ8IBO6XSWkkw
+
+###
+GET http://localhost:3000/auth
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}

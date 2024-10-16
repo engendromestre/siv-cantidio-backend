@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    command: ./.docker/start.sh
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/home/node/app
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    labels:
+      filebeat_collector: true
+  
+  db:
+    image: mysql:8.0.30-debian
+    environment:
+<<<<<<< HEAD
+      - MYSQL_DATABASE=adm_siv
+=======
+      - MYSQL_DATABASE=siv
+>>>>>>> ddf7011 (feature symbol)
+      - MYSQL_ROOT_PASSWORD=root
+    # volumes:
+    #   - ./.docker/mysql:/docker-entrypoint-initdb.d
+    tmpfs:
+      - /var/lib/mysql
+    security_opt:
+<<<<<<< HEAD
+      - seccomp:unconfined
+=======
+      - seccomp:unconfine
+>>>>>>> ddf7011 (feature symbol)
