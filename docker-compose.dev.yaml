@@ -17,11 +17,7 @@ services:
   db:
     image: mysql:8.0.30-debian
     environment:
-<<<<<<< HEAD
-      - MYSQL_DATABASE=adm_siv
-=======
       - MYSQL_DATABASE=siv
->>>>>>> ddf7011 (feature symbol)
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - ./.docker/dbdata:/var/lib/mysql:delegated

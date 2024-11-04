@@ -2,37 +2,12 @@ import { Global, Module, Scope } from '@nestjs/common';
 import { SequelizeModule, getConnectionToken } from '@nestjs/sequelize';
 import { ConfigService } from '@nestjs/config';
 import { CONFIG_SCHEMA_TYPE } from '../config-module/config.module';
-import { CategoryModel } from '../../core/category/infra/db/sequelize/category.model';
 import { UnitOfWorkSequelize } from '../../core/shared/infra/db/sequelize/unit-of-work-sequelize';
 import { Sequelize } from 'sequelize';
-import {
-  GenreCategoryModel,
-  GenreModel,
-} from '../../core/genre/infra/db/sequelize/genre-model';
-<<<<<<< HEAD
-import {
-  PatientCategoryModel,
-  PatientGenreModel,
-  PatientModel,
-} from '../../core/patient/infra/db/sequelize/patient.model';
-import { ImageMediaModel } from '../../core/patient/infra/db/sequelize/image-media.model';
-=======
-import { CastMemberModel } from '../../core/cast-member/infra/db/sequelize/cast-member-sequelize';
-
->>>>>>> ddf7011 (feature symbol)
+import { SymbolModel } from '@core/symbol/infra/sequelize/symbol.model';
 
 const models = [
-  CategoryModel,
-  GenreModel,
-  GenreCategoryModel,
-<<<<<<< HEAD
-  PatientModel,
-  PatientCategoryModel,
-  PatientGenreModel,
-  ImageMediaModel,
-=======
-  CastMemberModel,
->>>>>>> ddf7011 (feature symbol)
+  SymbolModel
 ];
 
 @Global()

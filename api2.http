@@ -1,0 +1,12 @@
+## valid uuid = 8f4b7b9c-3f7a-4b6c-8b0c-1c9c5b8b9b6a
+
+### 
+# @name createSymbol
+POST http://localhost:3000/symbols
+Content-Type: application/json
+
+{
+    "id": "b91a21e5-3083-4aac-bf7c-80c816c5eef7",
+    "description": "Symbol 1",
+    "type": "1"
+}
