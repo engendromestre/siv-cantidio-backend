@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { SymbolsModuleController } from './symbols.controller';
 import { SymbolModel } from '@core/symbol/infra/sequelize/symbol.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { SYMBOL_PROVIDERS } from './symbols.providers';
+import { SymbolsController } from './symbols.controller';
 
 @Module({
     imports: [SequelizeModule.forFeature([SymbolModel])],
-    controllers: [SymbolsModuleController],
+    controllers: [SymbolsController],
     providers: [
         ...Object.values(SYMBOL_PROVIDERS.REPOSITORIES),
         ...Object.values(SYMBOL_PROVIDERS.USE_CASES),

@@ -8,5 +8,25 @@ Content-Type: application/json
 {
     "id": "b91a21e5-3083-4aac-bf7c-80c816c5eef7",
     "description": "Symbol 1",
-    "type": "1"
+    "type": 1
 }
+
+###
+GET http://localhost:3000/symbols
+
+###
+GET http://localhost:3000/symbols/11eb430b-eb73-4b16-a074-7ee7b91a0e77
+
+###
+PATCH http://localhost:3000/symbols/11eb430b-eb73-4b16-a074-7ee7b91a0e77
+Content-Type: application/json
+
+{
+    "description": "Symbol 1 Updated",
+    "type": 1
+}
+
+###
+
+DELETE http://localhost:3000/symbols/11eb430b-eb73-4b16-a074-7ee7b91a0e77
+

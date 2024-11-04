@@ -1,5 +1,5 @@
 import { SymbolTypes } from "@core/symbol/domain/symbol-type.vo";
-import { IsBoolean, IsInt, IsNotEmpty, IsString, validateSync } from "class-validator";
+import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, validateSync } from "class-validator";
 
 
 export type CreateSymbolInputConstructorProps = {
@@ -14,8 +14,8 @@ export class CreateSymbolInput {
     description: string;
 
     @IsBoolean()
-    @IsNotEmpty()
-    is_active: boolean;
+    @IsOptional()
+    is_active?: boolean;
 
     @IsInt()
     @IsNotEmpty()

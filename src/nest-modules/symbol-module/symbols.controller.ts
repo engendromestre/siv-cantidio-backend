@@ -3,13 +3,13 @@ import { CreateSymbolUseCase } from '@core/symbol/application/use-cases/create-s
 import { DeleteSymbolUseCase } from '@core/symbol/application/use-cases/delete-symbol/delete-symbol.use-case';
 import { GetSymbolUseCase } from '@core/symbol/application/use-cases/get-symbol/get-symbol.use-case';
 import { ListSymbolsUseCase } from '@core/symbol/application/use-cases/list-symbols/list-symbols.use-case';
+import { UpdateSymbolInput } from '@core/symbol/application/use-cases/update-symbol/update-symbol.input';
 import { UpdateSymbolUseCase } from '@core/symbol/application/use-cases/update-symbol/update-symbol.use-case';
-import { Body, Controller, Delete, Get, HttpCode, Inject, Param, ParseUUIDPipe, Patch, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Inject, Param, ParseUUIDPipe, Patch, Post, Query } from '@nestjs/common';
 import { CreateSymbolDto } from './dto/create-symbol.dto';
+import { SearchSymbolsDto } from './dto/search-symbols.dto';
 import { UpdateSymbolDto } from './dto/update-symbol.dto';
 import { SymbolCollectionPresenter, SymbolPresenter } from './symbols.presenter';
-import { UpdateSymbolInput } from '@core/symbol/application/use-cases/update-symbol/update-symbol.input';
-import { SearchSymbolsDto } from './dto/search-symbols.dto';
 
 @Controller('symbols')
 export class SymbolsController {
@@ -28,6 +28,7 @@ export class SymbolsController {
     @Inject(ListSymbolsUseCase)
     private listUseCase: ListSymbolsUseCase;
 
+    @Post()
     async create(@Body() createSymbolRepo: CreateSymbolDto) {
         const output = await this.createUseCase.execute(createSymbolRepo);
         return SymbolsController.serialize(output);
