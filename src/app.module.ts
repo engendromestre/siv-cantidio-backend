@@ -5,7 +5,7 @@ import { DatabaseModule } from './nest-modules/database-module/database.module';
 import { EventModule } from './nest-modules/event-module/event.module';
 import { SharedModule } from './nest-modules/shared-module/shared.module';
 import { UseCaseModule } from './nest-modules/use-case-module/use-case.module';
-import { SymbolsModule } from './nest-modules/symbol-module/symbols.module';
+import { SymbolsModule } from './nest-modules/symbols-module/symbols.module';
 
 @Module({
   imports: [

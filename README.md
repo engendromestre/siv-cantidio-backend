@@ -73,4 +73,7 @@ node generate-token.ts
 # Swagger
 ```
 http://localhost:3000/api
+
+# Test E2E
+npm run test:e2e:watch -- --runInBand
 ```

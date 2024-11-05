@@ -5,12 +5,15 @@ import { GetSymbolUseCase } from '@core/symbol/application/use-cases/get-symbol/
 import { ListSymbolsUseCase } from '@core/symbol/application/use-cases/list-symbols/list-symbols.use-case';
 import { UpdateSymbolInput } from '@core/symbol/application/use-cases/update-symbol/update-symbol.input';
 import { UpdateSymbolUseCase } from '@core/symbol/application/use-cases/update-symbol/update-symbol.use-case';
-import { Body, Controller, Delete, Get, HttpCode, Inject, Param, ParseUUIDPipe, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Inject, Param, ParseUUIDPipe, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { CreateSymbolDto } from './dto/create-symbol.dto';
 import { SearchSymbolsDto } from './dto/search-symbols.dto';
 import { UpdateSymbolDto } from './dto/update-symbol.dto';
 import { SymbolCollectionPresenter, SymbolPresenter } from './symbols.presenter';
+import { AuthGuard } from '../auth-module/auth.guard';
+import { CheckIsAdminGuard } from '../auth-module/check-is-admin.guard';
 
+@UseGuards(AuthGuard, CheckIsAdminGuard)
 @Controller('symbols')
 export class SymbolsController {
     @Inject(CreateSymbolUseCase)
