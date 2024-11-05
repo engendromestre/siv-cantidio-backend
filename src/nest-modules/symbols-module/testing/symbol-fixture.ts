@@ -319,6 +319,7 @@ export class ListSymbolsFixture {
     static arrangeUnsorted() {
         const icon = Symbol.fake().anIcon();
         const created_at = new Date();
+
         const entitiesMap = {
             icon_a: icon
                 .withDescription('a')
@@ -328,8 +329,8 @@ export class ListSymbolsFixture {
                 .withDescription('AAA')
                 .withCreatedAt(new Date(created_at.getTime() + 2000))
                 .build(),
-            icon_AaA: icon
-                .withDescription('AaA')
+            icon_AaAa: icon
+                .withDescription('AaAa')
                 .withCreatedAt(new Date(created_at.getTime() + 3000))
                 .build(),
             icon_b: icon
@@ -340,17 +341,9 @@ export class ListSymbolsFixture {
                 .withDescription('c')
                 .withCreatedAt(new Date(created_at.getTime() + 5000))
                 .build(),
-            icon_f: icon
-                .withDescription('f')
-                .withCreatedAt(new Date(created_at.getTime() + 6000))
-                .build(),
-            icon_e: icon
-                .withDescription('e')
-                .withCreatedAt(new Date(created_at.getTime() + 7000))
-                .build(),
         };
 
-        const arrange_filter_by_description_sort_name_asc = [
+        const arrange_filter_by_description_sort_description_asc = [
             {
                 send_data: {
                     page: 1,
@@ -359,7 +352,7 @@ export class ListSymbolsFixture {
                     filter: { description: 'a' },
                 },
                 expected: {
-                    entities: [entitiesMap.icon_AAA, entitiesMap.icon_AaA],
+                    entities: [entitiesMap.icon_AAA, entitiesMap.icon_AaAa],
                     meta: {
                         total: 3,
                         current_page: 1,
@@ -399,7 +392,7 @@ export class ListSymbolsFixture {
                 expected: {
                     entities: [entitiesMap.icon_c, entitiesMap.icon_b],
                     meta: {
-                        total: 7,
+                        total: 5,
                         current_page: 1,
                         last_page: 3,
                         per_page: 2,
@@ -415,9 +408,9 @@ export class ListSymbolsFixture {
                     filter: { type: SymbolTypes.ICON },
                 },
                 expected: {
-                    entities: [entitiesMap.icon_AaA, entitiesMap.icon_AAA],
+                    entities: [entitiesMap.icon_AaAa, entitiesMap.icon_AAA],
                     meta: {
-                        total: 7,
+                        total: 5,
                         current_page: 2,
                         last_page: 3,
                         per_page: 2,
@@ -428,10 +421,88 @@ export class ListSymbolsFixture {
 
         return {
             arrange: [
-                ...arrange_filter_by_description_sort_name_asc,
+                ...arrange_filter_by_description_sort_description_asc,
                 ...arrange_filter_icons_sort_by_created_desc,
             ],
             entitiesMap,
+        }
+    }
+}
+
+export class UpdateSymbolFixture {
+    static keysInResponse = _keysInResponse;
+
+    static arrangeForUpdate() {
+        const faker = Symbol.fake().anIcon().withDescription('TEST');
+        return [
+            {
+                send_data: {
+                    description: faker.description,
+                    type: faker.type.type,
+                },
+                expected: {
+                    description: faker.description,
+                    type: faker.type.type,
+                },
+            },
+            {
+                send_data: {
+                    description: faker.description + ' Updated',
+                },
+                expected: {
+                    description: faker.description + ' Updated',
+                },
+            },
+            {
+                send_data: {
+                    type: SymbolTypes.ICON,
+                },
+                expected: {
+                    type: SymbolTypes.ICON,
+                },
+            },
+        ];
+    }
+
+    static arrangeInvalidRequest() {
+        const faker = Symbol.fake().anIcon().withDescription('TEST');
+        const defaultExpected = {
+            statusCode: 422,
+            error: 'Unprocessable Entity',
+        };
+
+        return {
+            TYPE_INVALID: {
+                send_data: {
+                    description: faker.description,
+                    type: 'a',
+                },
+                expected: {
+                    message: ['type must be an integer number'],
+                    ...defaultExpected,
+                },
+            },
+        };
+    }
+
+    static arrangeForEntityValidationError() {
+        const faker = Symbol.fake().anIcon().withDescription('TEST');
+        const defaultExpected = {
+            statusCode: 422,
+            error: 'Unprocessable Entity',
+        };
+
+        return {
+            TYPE_INVALID: {
+                send_data: {
+                    description: faker.description,
+                    type: 10,
+                },
+                expected: {
+                    message: ['Invalid cast member type: 10'],
+                    ...defaultExpected,
+                },
+            },
         };
     }
 }
