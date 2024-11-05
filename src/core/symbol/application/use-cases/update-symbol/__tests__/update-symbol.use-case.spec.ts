@@ -4,6 +4,7 @@ import { Symbol, SymbolId } from "@core/symbol/domain/symbol.aggregate";
 import { UpdateSymbolInput } from "../update-symbol.input";
 import { NotFoundError } from "@core/shared/domain/errors/not-found.error";
 import { SymbolTypes } from "@core/symbol/domain/symbol-type.vo";
+import { EntityValidationError } from "@core/shared/domain/validators/validation.error";
 
 
 describe('UpdateSymbolUseCase Unit Tests', () => {
@@ -30,6 +31,24 @@ describe('UpdateSymbolUseCase Unit Tests', () => {
     ).rejects.toThrow(new NotFoundError(symbolId.id, Symbol));
   });
 
+  it('should throw an entity validation error', async () => {
+    try {
+      const spyUpdate = jest.spyOn(repository, 'update');
+      const entity = Symbol.fake().anIcon().build();
+      repository.items = [entity];
+      await useCase.execute(
+        new UpdateSymbolInput({
+          id: entity.symbol_id.id,
+          description: 'test',
+          is_active: true,
+          type: 'a' as any,
+        })
+      )
+    } catch (e) {
+      expect(e).toBeInstanceOf(EntityValidationError);
+    }
+  });
+
   it('should update a symbol', async () => {
     const spyUpdate = jest.spyOn(repository, 'update');
     const entity = Symbol.fake().anIcon().build();
@@ -52,6 +71,7 @@ describe('UpdateSymbolUseCase Unit Tests', () => {
       is_active: true,
       created_at: entity.created_at,
     });
+
     type Arrange = {
       input: {
         id: string;
@@ -80,6 +100,21 @@ describe('UpdateSymbolUseCase Unit Tests', () => {
           id: entity.entity_id.id,
           description: 'test',
           is_active: true,
+          type: SymbolTypes.ICON,
+          created_at: entity.created_at,
+        },
+      },
+      {
+        input: {
+          id: entity.entity_id.id,
+          description: 'test is_active false',
+          is_active: false,
+          type: SymbolTypes.ICON,
+        },
+        expected: {
+          id: entity.entity_id.id,
+          description: 'test is_active false',
+          is_active: false,
           type: SymbolTypes.ICON,
           created_at: entity.created_at,
         },

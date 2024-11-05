@@ -77,7 +77,6 @@ describe('CreateSymbolUseCase', () => {
                 type: SymbolTypes.ICON,
                 created_at: repository.items[1].created_at,
             });
-
         });
     });
 });
